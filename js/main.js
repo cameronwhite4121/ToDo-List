@@ -25,4 +25,8 @@ function createTask(currentTask) {
     let taskCheckLabel = document.createElement("label");
     taskCheckLabel.setAttribute("class", "form-check-label");
     taskCheckLabel.setAttribute("for", "flexCheckDefault");
+    taskCheckLabel.innerHTML = currentTask;
+    taskDiv.appendChild(taskCheckInput);
+    taskDiv.appendChild(taskCheckLabel);
+    document.querySelector("#listContainer").appendChild(taskDiv);
 }
