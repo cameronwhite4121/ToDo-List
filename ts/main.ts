@@ -37,17 +37,21 @@ function createTask(currentTask) {
 
     let taskDiv = document.createElement("div");
     taskDiv.setAttribute("class", "form-check")
+    taskDiv.setAttribute("name", "checkDiv")
 
     // To my knowledge, you can only set one attribute at a time
     let taskCheckInput = document.createElement("input");
     taskCheckInput.setAttribute("class", "form-check-input");
     taskCheckInput.setAttribute("type", "checkbox");
     taskCheckInput.setAttribute("value", "");
-    taskCheckInput.setAttribute("id", "flexCheckDefault");
+    taskCheckInput.setAttribute("name", "checkBox");
+
+ 
 
     let taskCheckLabel = document.createElement("label");
     taskCheckLabel.setAttribute("class", "form-check-label");
     taskCheckLabel.setAttribute("for", "flexCheckDefault");
+    taskCheckLabel.setAttribute("name", "checkLabel");
     taskCheckLabel.innerHTML = currentTask;
 
     taskDiv.appendChild(taskCheckInput);

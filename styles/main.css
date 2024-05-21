@@ -5,8 +5,25 @@
 * that changed when clicked.
 */
 .form-check-input:checked + .form-check-label{
-    background-color: rgba(188, 188, 188, 0.889);
+    background-color: rgba(188, 188, 188, 0.431);
+}
+.form-check{
+    text-align: left;
+    margin-bottom: 1em;
 }
 h1 {
-    font-size: 5em;
+    font-size: 3em;
 }
+body {
+    background-color: rgba(0, 0, 0, 0.13);
+}
+#content{
+    border-radius: 1em;
+    padding: 2em;
+    margin-top: 2em;
+    max-width: 50%;
+    min-height: 30em;  
+    background-color: white;
+    box-shadow: 10px 10px 10px 10px;
+}
+

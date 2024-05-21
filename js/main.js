@@ -5,8 +5,7 @@ window.onload = function () {
 function submitTask() {
     console.log("Button Was Clicked");
     let currentTask = getTask();
-    if (currentTask.trim() != null) {
-        console.log(currentTask);
+    if (currentTask != null) {
         createTask(currentTask);
     }
     else {
@@ -27,14 +26,16 @@ function getTask() {
 function createTask(currentTask) {
     let taskDiv = document.createElement("div");
     taskDiv.setAttribute("class", "form-check");
+    taskDiv.setAttribute("name", "checkDiv");
     let taskCheckInput = document.createElement("input");
     taskCheckInput.setAttribute("class", "form-check-input");
     taskCheckInput.setAttribute("type", "checkbox");
     taskCheckInput.setAttribute("value", "");
-    taskCheckInput.setAttribute("id", "flexCheckDefault");
+    taskCheckInput.setAttribute("name", "checkBox");
     let taskCheckLabel = document.createElement("label");
     taskCheckLabel.setAttribute("class", "form-check-label");
     taskCheckLabel.setAttribute("for", "flexCheckDefault");
+    taskCheckLabel.setAttribute("name", "checkLabel");
     taskCheckLabel.innerHTML = currentTask;
     taskDiv.appendChild(taskCheckInput);
     taskDiv.appendChild(taskCheckLabel);
