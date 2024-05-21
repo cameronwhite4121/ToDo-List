@@ -4,14 +4,24 @@ window.onload = function () {
 };
 function submitTask() {
     console.log("Button Was Clicked");
-    let taskTextBox = document.querySelector("#inputTask");
-    let currentTask = taskTextBox.value;
-    if (currentTask.trim() != "") {
+    let currentTask = getTask();
+    if (currentTask.trim() != null) {
         console.log(currentTask);
         createTask(currentTask);
     }
     else {
         alert("Task cannot be empty");
+    }
+}
+function getTask() {
+    let taskTextBox = document.querySelector("#inputTask");
+    let currentTask = taskTextBox.value;
+    if (currentTask.trim() == "") {
+        alert("Task cannot be empty");
+    }
+    else {
+        console.log(currentTask);
+        return currentTask;
     }
 }
 function createTask(currentTask) {

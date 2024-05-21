@@ -5,15 +5,27 @@ window.onload = function() {
 
 function submitTask() {
     console.log("Button Was Clicked")
-    let taskTextBox = document.querySelector("#inputTask") as HTMLInputElement;
-    let currentTask = taskTextBox.value;
-    if (currentTask.trim() != "") {
+    
+    let currentTask = getTask();
+    if (currentTask.trim() != null) {
         console.log(currentTask);
         createTask(currentTask);
     }
     else {
         alert("Task cannot be empty"); // Can add more validation later
     }
+}
+
+function getTask() {
+    let taskTextBox = document.querySelector("#inputTask") as HTMLInputElement;
+    let currentTask:string = taskTextBox.value;
+    if (currentTask.trim() == "") {
+        alert("Task cannot be empty"); // Can add more validation later
+    }
+    else {
+        console.log(currentTask);
+        return currentTask;
+    } 
 }
 
 /**
