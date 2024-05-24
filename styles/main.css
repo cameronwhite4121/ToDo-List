@@ -6,10 +6,15 @@
 */
 .form-check-input:checked + .form-check-label{
     background-color: rgba(188, 188, 188, 0.431);
+    border-radius: 1em;
 }
 .form-check{
     text-align: left;
     margin-bottom: 1em;
+}
+#deleteButton {
+    margin-left: 10px;
+    position: absolute;
 }
 h1 {
     font-size: 3em;

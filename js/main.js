@@ -5,7 +5,8 @@ window.onload = function () {
 function submitTask() {
     console.log("Button Was Clicked");
     let currentTask = getTask();
-    if (currentTask != null) {
+    if (currentTask.trim() != null) {
+        console.log(currentTask);
         createTask(currentTask);
     }
     else {
@@ -19,6 +20,7 @@ function getTask() {
         alert("Task cannot be empty");
     }
     else {
+        taskTextBox.value = "";
         console.log(currentTask);
         return currentTask;
     }
@@ -37,7 +39,18 @@ function createTask(currentTask) {
     taskCheckLabel.setAttribute("for", "flexCheckDefault");
     taskCheckLabel.setAttribute("name", "checkLabel");
     taskCheckLabel.innerHTML = currentTask;
+    let taskDeleteButton = document.createElement("button");
+    taskDeleteButton.setAttribute("class", "btn btn-secondary btn-sm");
+    taskDeleteButton.setAttribute("id", "deleteButton");
+    taskDeleteButton.innerHTML = "X";
     taskDiv.appendChild(taskCheckInput);
     taskDiv.appendChild(taskCheckLabel);
+    taskDiv.appendChild(taskDeleteButton);
     document.querySelector("#listContainer").appendChild(taskDiv);
+    taskDeleteButton.onclick = function () {
+        deleteTask(taskDiv);
+    };
+}
+function deleteTask(taskDiv) {
+    taskDiv.remove();
 }
