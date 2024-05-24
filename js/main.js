@@ -1,6 +1,7 @@
 window.onload = function () {
     let addTaskButton = document.querySelector("#addTaskButton");
     addTaskButton.onclick = submitTask;
+    getTasksFromStorage();
 };
 function submitTask() {
     console.log("Button Was Clicked");
@@ -8,6 +9,7 @@ function submitTask() {
     if (currentTask.trim() != null) {
         console.log(currentTask);
         createTask(currentTask);
+        addTaskToStorage(currentTask);
     }
     else {
         alert("Task cannot be empty");
@@ -48,9 +50,33 @@ function createTask(currentTask) {
     taskDiv.appendChild(taskDeleteButton);
     document.querySelector("#listContainer").appendChild(taskDiv);
     taskDeleteButton.onclick = function () {
-        deleteTask(taskDiv);
+        deleteTask(taskDiv, currentTask);
     };
 }
-function deleteTask(taskDiv) {
+function deleteTask(taskDiv, currentTask) {
     taskDiv.remove();
+    const TaskStorageKey = "Tasks";
+}
+function addTaskToStorage(currentTask) {
+    const TaskStorageKey = "Tasks";
+    let taskData = localStorage.getItem(TaskStorageKey);
+    let tasks = [];
+    if (taskData != null) {
+        tasks = JSON.parse(taskData);
+    }
+    tasks.push(currentTask);
+    taskData = JSON.stringify(tasks);
+    localStorage.setItem(TaskStorageKey, taskData);
+}
+function getTasksFromStorage() {
+    const TaskStorageKey = "Tasks";
+    let taskData = localStorage.getItem(TaskStorageKey);
+    let tasks = [];
+    if (taskData != null) {
+        tasks = JSON.parse(taskData);
+    }
+    for (let i = 0; i < tasks.length; i++) {
+        let currentTask = tasks[i];
+        createTask(currentTask);
+    }
 }

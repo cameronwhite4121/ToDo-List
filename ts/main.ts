@@ -1,12 +1,14 @@
 window.onload = function() {
     let addTaskButton = document.querySelector("#addTaskButton") as HTMLButtonElement;
     addTaskButton.onclick = submitTask;
+    getTasksFromStorage();
 }
 
 /**
  * Function is called when the submit button is clicked.
  * This calls the helper function, getTask, and sends the
- * task to the createTask to be outputted.
+ * task to the createTask to be outputted. Adds the task to
+ * localStorage as well.
  */
 function submitTask() {
     console.log("Button Was Clicked")
@@ -15,6 +17,7 @@ function submitTask() {
     if (currentTask.trim() != null) {
         console.log(currentTask);
         createTask(currentTask);
+        addTaskToStorage(currentTask);
     }
     else {
         alert("Task cannot be empty"); // Can add more validation later
@@ -36,7 +39,7 @@ function getTask() {
 
 /**
  * Uses DOM manipulation in conjunction with bootstrap to inject
- * the created task onto the webpage. 
+ * the created task onto the webpage.
  * @param currentTask 
  */
 function createTask(currentTask) {
@@ -66,15 +69,71 @@ function createTask(currentTask) {
 
     taskDiv.appendChild(taskCheckInput);
     taskDiv.appendChild(taskCheckLabel);
-    taskDiv.appendChild(taskDeleteButton);
+    taskDiv.appendChild(taskDeleteButton); 
 
     document.querySelector("#listContainer").appendChild(taskDiv);
 
     taskDeleteButton.onclick = function() {
-        deleteTask(taskDiv);
-    };
+        deleteTask(taskDiv, currentTask);
+    }
 }
 
-function deleteTask(taskDiv) {
+/**
+ * Deletes the current div from the webpage and the localStorage
+ * @param taskDiv The div to be deleted
+ * @param currentTask The task to be deleted
+ */
+function deleteTask(taskDiv, currentTask) {
     taskDiv.remove();
+
+    const TaskStorageKey = "Tasks"; // This code does not work
+    // localStorage.removeItem("Tasks"); // Deletes the entire task array instead of indiviudal tasks
+}
+
+/**
+ * Adds the task to localStorage
+ * @param currentTask The task to be added.
+ */
+function addTaskToStorage(currentTask):void {
+
+    const TaskStorageKey = "Tasks";
+
+    // Read songs from storage
+    let taskData = localStorage.getItem(TaskStorageKey);
+    let tasks = [];
+
+    // If taskData is not null, parse
+    if (taskData != null) {
+        tasks = JSON.parse(taskData);
+    }
+
+    // Adds to list
+    tasks.push(currentTask);
+
+    // Adds list to storage
+    taskData = JSON.stringify(tasks);
+    localStorage.setItem(TaskStorageKey, taskData);
+    
+}
+
+/**
+ * If there is any data in the storage, it will output it to the page
+ */
+function getTasksFromStorage():void {
+    const TaskStorageKey = "Tasks";
+
+    // Read songs from storage
+    let taskData = localStorage.getItem(TaskStorageKey);
+    let tasks = [];
+
+    // If taskData is not null, parse
+    if (taskData != null) {
+        tasks = JSON.parse(taskData);
+    }     
+
+    for (let i = 0; i < tasks.length; i++) {
+        let currentTask = tasks[i];
+        createTask(currentTask);
+    }
+
 }
